@@ -16,12 +16,12 @@ In addition to the mandatory arguments, the command also comes with several opti
 
 - `--no-controllers`: Generates the skeleton without the HTTP structure and initial controller file.
 - `--no-views`: Generates the skeleton without the views directory and initial view file.
-- `--no-extension`: Generates the skeleton without the `Extension` class for setting up the install/uninstall and other options.
 - `--no-provider`: Generates the skeleton without a service provider.
-- `--no-quickinstall`: Generates the skeleton without a QuickInstall file.
+- `--include-config`: Generates an empty config file.
+- `--include-routes`: Generates an empty routes file for your extension.
 
 Any combination of these options can be called when running the initial command, like so:
 
 `php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --no-controllers --no-views`
 `php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --no-provider`
-`php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --no-views --no-extension --no-provider`
+`php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --include-config --include-routes`

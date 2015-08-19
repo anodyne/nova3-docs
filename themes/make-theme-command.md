@@ -12,11 +12,10 @@ When it comes time to create our first theme, we can generate the skeleton simpl
 
 In addition to the mandatory argument, the command also comes with several options that can turn different pieces of the creation process on and off if you know ahead of time what you do and don't need for your theme.
 
-- `--no-quickinstall`: Generates the skeleton without a QuickInstall file.
 - `--override-styles`: Generates a `style.css` stylesheet that when seen by Nova will skip pulling in Nova's base styles.
 - `--include-components`: Generates the structure for overriding components.
 - `--include-options`: Generates the `options.json` file used for creating theme options.
-- `--include-theme`: Generate the `Theme` class for overriding how your Theme is built and rendered.
+- `--include-theme-class`: Generate the `Theme` class for overriding how your Theme is built and rendered.
 
 Any combination of these options can be called when running the initial command, like so:
 
