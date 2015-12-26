@@ -1,0 +1,1 @@
+# Uninstalling Your Extension
