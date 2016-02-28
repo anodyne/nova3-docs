@@ -20,12 +20,13 @@ If you need to do some work during the start up of the extension, you can overri
 
 By default, the `initialize` method loads the config file (if it exists) and the routes file (if it exists). In the event you don't need either of those things changed but still want to do some initialization work, you'll need to make sure the parent is called first.
 
-<pre>protected function initialize()
+```php
+protected function initialize()
 {
 	parent::initialize();
 
 	// Your code here
-}</pre>
+}```
 
 If you want to change the way config files or routes are loaded, you don't have to call the parent method and can instead put your code directly in the method.
 
