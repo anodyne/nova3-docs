@@ -26,15 +26,18 @@ protected function initialize()
 	parent::initialize();
 
 	// Your code here
-}```
+}
+```
 
 If you want to change the way config files or routes are loaded, you don't have to call the parent method and can instead put your code directly in the method.
 
-<pre>protected function initialize()
+```php
+protected function initialize()
 {
 	// Config loading
 
 	// Route loading
-}</pre>
+}
+```
 
 In the event that you just need to change one of the loading operations, you can override either the `loadConfig` method or the `loadFileRoutes` method from the base class file.
