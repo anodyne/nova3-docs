@@ -15,9 +15,9 @@ Using Vue components, we've built custom tags that help with responsive designs 
 These components are used just like any other HTML tag:
 
 ```html
-&lt;phone-tablet>This will only appear on phones and tablets.&lt;/phone-tablet>
+<phone-tablet>This will only appear on phones and tablets.</phone-tablet>
 
-&lt;desktop>This will only appear on small and large desktop screens.&lt;/desktop>
+<desktop>This will only appear on small and large desktop screens.</desktop>
 ```
 
 This is an easy way to target different devices without needing to remember specific markup from Bootstrap about targeting different devices.
