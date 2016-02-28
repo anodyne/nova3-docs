@@ -4,7 +4,7 @@ Laravel includes an array of aliases to make referencing classes easier. For Nov
 
 ## How Aliases Work
 
-In the Nova core, when we want to reference the User model, we reference the `User` class. The catch though is that there actually isn't a `User` class. Because of how Nova is structured, the actual class is `Nova\Core\Users\Data\User`. It would be a pain to have to type that every time though, so using an alias means that whenever we use `User`, Laravel actually grabs `Nova\Core\Users\Data\User`. That means, that if you want to make changes to the `User` class, you can do so in your own extension and then change the class `User` references, then when the Nova core calls the `User` class, it's using your custom version of that class.
+In the Nova core, when we want to reference the User model, we reference the `User` class. The catch though is that there actually isn't a `User` class. Because of how Nova is structured, the actual class is `Nova\Core\Users\Data\User`. It would be a pain to have to type that every time though, so using an alias means that whenever we use `User`, Laravel actually grabs `Nova\Core\Users\Data\User`. That means, that if you want to make changes to the `User` class, you can do so in your own extension and then change the class `User` references the app config file. The next time the Nova core (or anything that uses the `User` class) calls the `User` class, it's using your custom version of that class instead of the one that comes with Nova.
 
 ## Updating Aliases
 
