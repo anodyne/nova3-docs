@@ -23,8 +23,7 @@ We can demonstrate the concept with a simple, yet naive example.
 Here we have a Database class that requires an adapter to speak to the database. We instantiate the adapter in the constructor and create a hard dependency. This makes testing difficult and means the Database class is very tightly coupled to the adapter.
 
 ```php
-&lt;?php
-namespace Database;
+<?php namespace Database;
 
 class Database
 {
@@ -42,8 +41,7 @@ class MysqlAdapter {}
 This code can be refactored to use Dependency Injection and therefore loosen the dependency.
 
 ```php
-&lt;?php
-namespace Database;
+<?php namespace Database;
 
 class Database
 {
