@@ -5,7 +5,7 @@ Like many of Laravel and Nova's classes, sometimes there's a need for a config f
 By default, all you need to do is to create a `config.php` file at the root of your extension and make sure it returns an array of the values.
 
 ```php
-&lt;?php
+<?php
 
 return [
 	'key1' => 'value1',
