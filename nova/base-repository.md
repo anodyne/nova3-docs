@@ -24,9 +24,11 @@ Several of the methods below accept a `$data` argument. In any cases you see thi
 
 Gets all records in a database table.
 
-<pre>$items = $this->storyRepo->all();
+```php
+$items = $this->storyRepo->all();
 
-$itemsWithRelations = $this->storyRepo->all(['posts', 'posts.authors']);</pre>
+$itemsWithRelations = $this->storyRepo->all(['posts', 'posts.authors']);
+```
 
 _Returns:_ a collection of models
 
@@ -34,7 +36,9 @@ _Returns:_ a collection of models
 
 Counts everything in a database table using the key-value pair as criteria for the query.
 
-<pre>$count = $this->tabRepo->countBy('parent_id', 11);</pre>
+```php
+$count = $this->tabRepo->countBy('parent_id', 11);
+```
 
 _Returns:_ an integer
 
@@ -42,22 +46,26 @@ _Returns:_ an integer
 
 Creates a new record in the database with the data passed to it.
 
-<pre>$post = $this->postRepo->create([
+```php
+$post = $this->postRepo->create([
 	'title' => "My Post",
 	'location' => "Main Office Building",
 	'timeline' => "Monday morning",
 	'content' => "We open on an office building on a Monday morning...",
-]);</pre>
+]);
+```
 
 ### `delete($resource)`
 
 Deletes the resource.
 
-<pre>$page = $this->pageRepo->getById(14);
+```php
+$page = $this->pageRepo->getById(14);
 
 $deletedPage = $this->pageRepo->delete($page);
 
-$deletedPage2 = $this->pageRepo->delete(27);</pre>
+$deletedPage2 = $this->pageRepo->delete(27);
+```
 
 _Returns:_ an instance of the model that was deleted
 
@@ -65,7 +73,9 @@ _Returns:_ an instance of the model that was deleted
 
 In some cases, models use soft deleting (keeping an item in the database but setting a deleted at timestamp). In those instances, if you want to totally remove the resource from the database, you'll need to do so with a force delete.
 
-<pre>$character = $this->characterRepo->forceDelete(18);</pre>
+```php
+$character = $this->characterRepo->forceDelete(18);
+```
 
 _Returns:_ an instance of the model that was deleted
 
@@ -73,7 +83,9 @@ _Returns:_ an instance of the model that was deleted
 
 Get a record from the database by its numerical primary ID.
 
-<pre>$user = $this->userRepo->getById(4);</pre>
+```php
+$user = $this->userRepo->getById(4);
+```
 
 _Returns:_ an instance of the model
 
@@ -83,9 +95,11 @@ _Returns:_ an instance of the model
 
 Get the first record that matches the criteria of the key-value pair. By default, Nova will use an _equals_ operator for the query, but you can pass any operator to the fourth parameter (=, !=, <, >, <=, >=, <>, LIKE, NOT LIKE, IS NOT NULL, IS NULL, IS NOT, IS, REGEXP, NOT REGEXP).
 
-<pre>$menuItem = $this->menuItemRepo->getFirstBy('title', 'Home');
+```php
+$menuItem = $this->menuItemRepo->getFirstBy('title', 'Home');
 
-$user = $this->userRepo->getFirstBy('name', 'Bob', [], 'LIKE');</pre>
+$user = $this->userRepo->getFirstBy('name', 'Bob', [], 'LIKE');
+```
 
 _Returns:_ an instance of the model
 
@@ -93,7 +107,9 @@ _Returns:_ an instance of the model
 
 Get all the records that match the criteria of the key-value pair. By default, Nova will use an _equals_ operator for the query, but you can pass any operator to the fourth parameter (=, !=, <, >, <=, >=, <>, LIKE, NOT LIKE, IS NOT NULL, IS NULL, IS NOT, IS, REGEXP, NOT REGEXP).
 
-<pre>$menuItems = $this->menuItemRepo->getManyBy('title', 'Admin%', [], 'LIKE');</pre>
+```php
+$menuItems = $this->menuItemRepo->getManyBy('title', 'Admin%', [], 'LIKE');
+```
 
 _Returns:_ a collection of models
 

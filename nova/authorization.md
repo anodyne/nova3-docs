@@ -24,10 +24,12 @@ So why move this type of work out of the controller and into its own class?
 
 Imagine that you want to make sure that the only way someone can create a new page is if they have the `page.create` permission _as well as_ a new `site.admin` permission that you created. Previously, there would be no good or easy way to make that change. In Nova 3, it's a matter of extending that policy class and making a change. It might look a little something like this:
 
-<pre>public function create(User $user)
+```php
+public function create(User $user)
 {
 	return $user->can('page.create') and $user->can('site.admin');
-}</pre>
+}
+```
 
 Because you've extended the policy class (and updated the alias to it), Nova will just use the class you specified and start basing its criteria for creating a new page on what you told it to in the page policy's `create()` method.
 
@@ -39,20 +41,23 @@ There are several ways to use Nova's authorization system depending on what you'
 
 Inside any controller that extends Nova's base controller, developers have access to the `authorize()` method. Using controller authorization will do a bunch of things for you that you would have to otherwise do yourself like displaying an error page, writing to the log files, and create a Nova system event.
 
-<pre>public function index()
+```php
+public function index()
 {
 	$page = $this->data->page = new Page;
 
 	$this->authorize('manage', $page, "You do not have permission to manage pages.");
 
 	...
-}</pre>
+}
+```
 
 ### Blade Directives
 
 In Blade templates, there's a distinct directives that can be used in places of if/else logic blocks for checking permissions and/or policies: `@can`.
 
-<pre>@can('manage', $page)
+```php
+@can('manage', $page)
 	Show something if the user can manage the page.
 @endcan
 
@@ -60,7 +65,8 @@ In Blade templates, there's a distinct directives that can be used in places of 
 	Show something if the user can remove the page.
 @else
 	Show something if the user cannot remove the page.
-@endcan</pre>
+@endcan
+```
 
 ### The Gate Facade
 

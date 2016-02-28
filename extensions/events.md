@@ -8,7 +8,8 @@ _Note: by manually register event listeners in this way, you won't be able to sp
 
 There are several ways to register your event. First, you can pull the event instance out of the IoC container either through the `$app` instance or through a facade. (If you use the facade, remember that you'll have to add the using statement.)
 
-<pre>public function boot()
+```php
+public function boot()
 {
 	$this->app['events']->listen('nova.start', function () {
 		// Your code goes here
@@ -17,11 +18,13 @@ There are several ways to register your event. First, you can pull the event ins
 	Event::listen('nova.stop', function () {
 		// Your code goes here
 	});
-}</pre>
+}
+```
 
 You can also inject the event dispatcher contract directly in to the `boot` method. (There are various reasons you may want to do this, but in most cases, using the `$app` instance is going to be the easiest way to do this.)
 
-<pre>use Illuminate\Contracts\Events\Dispatcher;
+```php
+use Illuminate\Contracts\Events\Dispatcher;
 
 class MyServiceProvider extends ServiceProvider {
 
@@ -31,7 +34,8 @@ class MyServiceProvider extends ServiceProvider {
 			// Your code goes here
 		});
 	}
-}</pre>
+}
+```
 
 _Note: the example above is not complete and meant for illustration purposes only._
 

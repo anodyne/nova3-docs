@@ -12,16 +12,22 @@ To update an alias, you'll need to update the `config/app.php` file. In a fresh 
 
 Let's stick with the `User` class example and assume you've made a change to the `User` class that you want to use everywhere. In order to have Nova start using that new class, you'd head over to `nova/config/app.php` and find where the `User` alias is defined:
 
-<pre>'User' => Nova\Core\Users\Data\User::class,</pre>
+```php
+'User' => Nova\Core\Users\Data\User::class,
+```
 
 Copy that line and come over to your `config/app.php` file to find the empty aliases array:
 
-<pre>'aliases' => [],</pre>
+```php
+'aliases' => [],
+```
 
 Throw the line you copied into the aliases array and then make your modifications:
 
-<pre>'aliases' => [
+```php
+'aliases' => [
 	'User' => MyExtension\NewUserClass\User::class,
-],</pre>
+],
+```
 
 That's it! Now, every time Nova references the `User` class, it'll actually point to your extension to use it instead.

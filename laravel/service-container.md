@@ -22,37 +22,41 @@ We can demonstrate the concept with a simple, yet naive example.
 
 Here we have a Database class that requires an adapter to speak to the database. We instantiate the adapter in the constructor and create a hard dependency. This makes testing difficult and means the Database class is very tightly coupled to the adapter.
 
-<pre><?php
+```php
+&lt;?php
 namespace Database;
 
 class Database
 {
     protected $adapter;
 
-    public function \__construct()
+    public function __construct()
     {
         $this->adapter = new MySqlAdapter;
     }
 }
 
-class MysqlAdapter {}</pre>
+class MysqlAdapter {}
+```
 
 This code can be refactored to use Dependency Injection and therefore loosen the dependency.
 
-<pre><?php
+```php
+&lt;?php
 namespace Database;
 
 class Database
 {
     protected $adapter;
 
-    public function \__construct(MySqlAdapter $adapter)
+    public function __construct(MySqlAdapter $adapter)
     {
         $this->adapter = $adapter;
     }
 }
 
-class MysqlAdapter {}</pre>
+class MysqlAdapter {}
+```
 
 Now we are giving the Database class its dependency rather than it creating it itself. We could even create a method that would accept an argument of the dependency and set it that way, or if the `$adapter` property was public we could set it directly.
 
@@ -80,10 +84,12 @@ A Service Container (or dependency injection container) is simply a PHP object t
 
 For example, suppose you have a simple PHP class that delivers email messages. Without a service container, you must manually create the object whenever you need it:
 
-<pre>use AppBundle\Mailer;
+```php
+use AppBundle\Mailer;
 
 $mailer = new Mailer('sendmail');
-$mailer->send('ryan@example.com', ...);</pre>
+$mailer->send('ryan@example.com', ...);
+```
 
 This is easy enough. The imaginary Mailer class allows you to configure the method used to deliver the email messages (e.g. sendmail, smtp, etc). But what if you wanted to use the mailer service somewhere else? You certainly don't want to repeat the mailer configuration every time you need to use the Mailer object. What if you needed to change the transport from sendmail to smtp everywhere in the application? You'd need to hunt down every place you create a Mailer service and change it.
 
@@ -106,9 +112,11 @@ Almost all of your service container bindings will be registered within service 
 
 Within a service provider, you always have access to the container via the $this->app instance variable. We can register a binding using the bind method, passing the class or interface name that we wish to register along with a Closure that returns an instance of the class:
 
-<pre>$this->app->bind('HelpSpot\API', function ($app) {
+```php
+$this->app->bind('HelpSpot\API', function ($app) {
     return new HelpSpot\API($app['HttpClient']);
-});</pre>
+});
+```
 
 Notice that we receive the container itself as an argument to the resolver. We can then use the container to resolve sub-dependencies of the object we are building.
 
@@ -116,15 +124,19 @@ Notice that we receive the container itself as an argument to the resolver. We c
 
 You may also bind an existing object instance into the container using the instance method. The given instance will always be returned on subsequent calls into the container:
 
-<pre>$fooBar = new FooBar(new SomethingElse);
+```php
+$fooBar = new FooBar(new SomethingElse);
 
-$this->app->instance('FooBar', $fooBar);</pre>
+$this->app->instance('FooBar', $fooBar);
+```
 
 ### Binding Interfaces to Implementations
 
 A very powerful feature of the service container is its ability to bind an interface to a given implementation. For example, let's assume we have an EventPusher interface and a RedisEventPusher implementation. Once we have coded our RedisEventPusher implementation of this interface, we can register it with the service container like so:
 
-<pre>$this->app->bind('App\Contracts\EventPusher', 'App\Services\RedisEventPusher');</pre>
+```php
+$this->app->bind('App\Contracts\EventPusher', 'App\Services\RedisEventPusher');
+```
 
 This tells the container that it should inject the RedisEventPusher when a class needs an implementation of EventPusher. Now we can type-hint the EventPusher interface in a constructor, or any other location where dependencies are injected by the service container:
 
@@ -132,31 +144,38 @@ This tells the container that it should inject the RedisEventPusher when a class
 
 Sometimes you may have two classes that utilize the same interface, but you wish to inject different implementations into each class. For example, when our system receives a new Order, we may want to send an event via PubNub rather than Pusher. Laravel provides a simple, fluent interface for defining this behavior:
 
-<pre>$this->app->when('App\Handlers\Commands\CreateOrderHandler')
+```php
+$this->app->when('App\Handlers\Commands\CreateOrderHandler')
           ->needs('App\Contracts\EventPusher')
-          ->give('App\Services\PubNubEventPusher');</pre>
+          ->give('App\Services\PubNubEventPusher');
+```
 
 You may even pass a Closure to the give method:
 
-<pre>$this->app->when('App\Handlers\Commands\CreateOrderHandler')
+```php
+$this->app->when('App\Handlers\Commands\CreateOrderHandler')
           ->needs('App\Contracts\EventPusher')
           ->give(function () {
                   // Resolve dependency...
-              });</pre>
+              });
+```
 
 #### Binding Primitives
 
 Sometimes you may have a class that receives some injected classes, but also needs an injected primitive value such as an integer. You may easily use contextual binding to inject any value your class may need:
 
-<pre>$this->app->when('App\Handlers\Commands\CreateOrderHandler')
+```php
+$this->app->when('App\Handlers\Commands\CreateOrderHandler')
           ->needs('$maxOrderCount')
-          ->give(10);</pre>
+          ->give(10);
+```
 
 ### Tagging
 
 Occasionally, you may need to resolve all of a certain "category" of binding. For example, perhaps you are building a report aggregator that receives an array of many different Report interface implementations. After registering the Report implementations, you can assign them a tag using the tag method:
 
-<pre>$this->app->bind('SpeedReport', function () {
+```php
+$this->app->bind('SpeedReport', function () {
     //
 });
 
@@ -164,23 +183,30 @@ $this->app->bind('MemoryReport', function () {
     //
 });
 
-$this->app->tag(['SpeedReport', 'MemoryReport'], 'reports');</pre>
+$this->app->tag(['SpeedReport', 'MemoryReport'], 'reports');
+```
 
 Once the services have been tagged, you may easily resolve them all via the tagged method:
 
-<pre>$this->app->bind('ReportAggregator', function ($app) {
+```php
+$this->app->bind('ReportAggregator', function ($app) {
     return new ReportAggregator($app->tagged('reports'));
-});</pre>
+});
+```
 
 ## Resolving
 
 There are several ways to resolve something out of the container. First, you may use the make method, which accepts the name of the class or interface you wish to resolve:
 
-<pre>$fooBar = $this->app->make('FooBar');</pre>
+```php
+$fooBar = $this->app->make('FooBar');
+```
 
 Secondly, you may access the container like an array, since it implements PHP's ArrayAccess interface:
 
-<pre>$fooBar = $this->app['FooBar'];</pre>
+```php
+$fooBar = $this->app['FooBar'];
+```
 
 Lastly, but most importantly, you may simply "type-hint" the dependency in the constructor of a class that is resolved by the container, including controllers, event listeners, queue jobs, middleware, and more. In practice, this is how most of your objects are resolved by the container.
 
@@ -190,12 +216,14 @@ The container will automatically inject dependencies for the classes it resolves
 
 The service container fires an event each time it resolves an object. You may listen to this event using the resolving method:
 
-<pre>$this->app->resolving(function ($object, $app) {
+```php
+$this->app->resolving(function ($object, $app) {
     // Called when container resolves object of any type...
 });
 
 $this->app->resolving(FooBar::class, function (FooBar $fooBar, $app) {
     // Called when container resolves objects of type "FooBar"...
-});</pre>
+});
+```
 
 As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.
