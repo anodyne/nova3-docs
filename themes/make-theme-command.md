@@ -21,6 +21,6 @@ In addition to the mandatory argument, the command also comes with several optio
 
 Any combination of these options can be called when running the initial command, like so:
 
-<code>php artisan nova:make:theme sunny --override-styles
+<pre>php artisan nova:make:theme sunny --override-styles
 php artisan nova:make:theme sunny --include-theme --include-options
-php artisan nova:make:theme sunny --include-components --include-theme</code>
+php artisan nova:make:theme sunny --include-components --include-theme</pre>
