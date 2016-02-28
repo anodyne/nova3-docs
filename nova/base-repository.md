@@ -24,9 +24,9 @@ Several of the methods below accept a `$data` argument. In any cases you see thi
 
 Gets all records in a database table.
 
-`$items = $this->storyRepo->all();
+<pre>$items = $this->storyRepo->all();
 
-$itemsWithRelations = $this->storyRepo->all(['posts', 'posts.authors'])`
+$itemsWithRelations = $this->storyRepo->all(['posts', 'posts.authors']);</pre>
 
 _Returns:_ a collection of models
 
@@ -34,7 +34,7 @@ _Returns:_ a collection of models
 
 Counts everything in a database table using the key-value pair as criteria for the query.
 
-`$count = $this->tabRepo->countBy('parent_id', 11);`
+<pre>$count = $this->tabRepo->countBy('parent_id', 11);</pre>
 
 _Returns:_ an integer
 
@@ -42,22 +42,22 @@ _Returns:_ an integer
 
 Creates a new record in the database with the data passed to it.
 
-`$post = $this->postRepo->create([
+<pre>$post = $this->postRepo->create([
 	'title' => "My Post",
 	'location' => "Main Office Building",
 	'timeline' => "Monday morning",
 	'content' => "We open on an office building on a Monday morning...",
-]);`
+]);</pre>
 
 ### `delete($resource)`
 
 Deletes the resource.
 
-`$page = $this->pageRepo->getById(14);
+<pre>$page = $this->pageRepo->getById(14);
 
 $deletedPage = $this->pageRepo->delete($page);
 
-$deletedPage2 = $this->pageRepo->delete(27);`
+$deletedPage2 = $this->pageRepo->delete(27);</pre>
 
 _Returns:_ an instance of the model that was deleted
 
@@ -65,7 +65,7 @@ _Returns:_ an instance of the model that was deleted
 
 In some cases, models use soft deleting (keeping an item in the database but setting a deleted at timestamp). In those instances, if you want to totally remove the resource from the database, you'll need to do so with a force delete.
 
-`$character = $this->characterRepo->forceDelete(18);`
+<pre>$character = $this->characterRepo->forceDelete(18);</pre>
 
 _Returns:_ an instance of the model that was deleted
 
@@ -73,7 +73,7 @@ _Returns:_ an instance of the model that was deleted
 
 Get a record from the database by its numerical primary ID.
 
-`$user = $this->userRepo->getById(4);`
+<pre>$user = $this->userRepo->getById(4);</pre>
 
 _Returns:_ an instance of the model
 
@@ -83,49 +83,49 @@ _Returns:_ an instance of the model
 
 Get the first record that matches the criteria of the key-value pair. By default, Nova will use an _equals_ operator for the query, but you can pass any operator to the fourth parameter (=, !=, <, >, <=, >=, <>, LIKE, NOT LIKE, IS NOT NULL, IS NULL, IS NOT, IS, REGEXP, NOT REGEXP).
 
-`$menuItem = $this->menuItemRepo->getFirstBy('title', 'Home');
+<pre>$menuItem = $this->menuItemRepo->getFirstBy('title', 'Home');
 
-$user = $this->userRepo->getFirstBy('name', 'Bob', [], 'LIKE');`
+$user = $this->userRepo->getFirstBy('name', 'Bob', [], 'LIKE');</pre>
 
 _Returns:_ an instance of the model
 
-`getManyBy($column, $value, $with, $operator)`
+### `getManyBy($column, $value, $with, $operator)`
 
 Get all the records that match the criteria of the key-value pair. By default, Nova will use an _equals_ operator for the query, but you can pass any operator to the fourth parameter (=, !=, <, >, <=, >=, <>, LIKE, NOT LIKE, IS NOT NULL, IS NULL, IS NOT, IS, REGEXP, NOT REGEXP).
 
-`$menuItems = $this->menuItemRepo->getManyBy('title', 'Admin%', [], 'LIKE');`
+<pre>$menuItems = $this->menuItemRepo->getManyBy('title', 'Admin%', [], 'LIKE');</pre>
 
 _Returns:_ a collection of models
 
-`listAll($key, $value)`
+### `listAll($key, $value)`
 
 _Returns:_ an array
 
-`listAllBy($key, $value, $displayKey, $displayValue)`
+### `listAllBy($key, $value, $displayKey, $displayValue)`
 
 _Returns:_ an array
 
-`listAllFiltered($key, $value, $filters)`
+### `listAllFiltered($key, $value, $filters)`
 
 _Returns:_ an array
 
-`listCollection($collection, $displayKey, $displayValue)`
+### `listCollection($collection, $displayKey, $displayValue)`
 
 _Returns:_ an array
 
-`make($with)`
+### `make($with)`
 
 The `make` method creates a new instance of that particular model. With the return value, you can chain additional Builder methods like `where`. The `$with` variable is an array of relationships to eager load and is optional.
 
 _Returns:_ a Builder instance
 
-`update($resource, $data)`
+### `update($resource, $data)`
 
 Updates a record in the database. Like other instances, the resource can be a model or a numerical primary ID. Additionally, the record will be updated with the data array passed.
 
 _Returns:_ an instance of the model updated or `false` if the resource didn't exist
 
-`updateOrder($resource, $newOrder)`
+### `updateOrder($resource, $newOrder)`
 
 Many of the database tables in Nova allow for ordering entries. This method provides a convenient way to set a new order on a record. Like other instances, the resource can be a model or a numerical primary ID. Additionally, the `$newOrder` is an integer that represents what the new order of the record should be.
 

@@ -22,6 +22,6 @@ In addition to the mandatory arguments, the command also comes with several opti
 
 Any combination of these options can be called when running the initial command, like so:
 
-`php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --no-controllers --no-views`
-`php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --no-provider`
-`php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --include-config --include-routes`
+<pre>php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --no-controllers --no-views
+php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --no-provider
+php artisan nova:make:extension MyAwesomeName MyAwesomeExtension --include-config --include-routes</pre>

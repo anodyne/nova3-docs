@@ -10,7 +10,7 @@ If you need to do some setup for your extension or create classes or set up even
 
  Within the `register` method, you should only bind things into the service container. You should __never__ attempt to register any event listeners, routes, or any other piece of functionality within the `register` method. Otherwise, you may accidentally use a service that is provided by a service provider which has not been loaded yet.
 
- `<?php namespace Extension\VendorName\ExtensionName;
+ <pre>&lt;?php namespace Extension\VendorName\ExtensionName;
 
  use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -23,13 +23,13 @@ If you need to do some setup for your extension or create classes or set up even
 	    });
 	}
 
-}`
+}</pre>
 
 ## The `boot` Method
 
 So, what if you need to register a view composer within the service provider? This should be done within the `boot` method. This method is called after all other service providers have been registered, meaning you have access to all other services that have been registered by Laravel and Nova.
 
-`<?php namespace Extension\VendorName\ExtensionName;
+<pre>&lt;?php namespace Extension\VendorName\ExtensionName;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -47,7 +47,7 @@ class ServiceProvider extends LaravelServiceProvider {
 		//
 	}
 
-}`
+}</pre>
 
 __Important: The register method is required in all service providers whether you use it or not.__
 
@@ -57,7 +57,7 @@ If your provider is only registering bindings in the service container, you may 
 
 To defer the loading of a provider, set the `defer` property to true and define a `provides` method. The `provides` method returns the service container bindings that the provider registers.
 
-`<?php namespace Extension\VendorName\ExtensionName;
+<pre>&lt;?php namespace Extension\VendorName\ExtensionName;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -70,4 +70,4 @@ class ServiceProvider extends LaravelServiceProvider {
 	    return ['Riak\Contracts\Connection'];
 	}
 
-}`
+}</pre>

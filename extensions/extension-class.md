@@ -20,20 +20,20 @@ If you need to do some work during the start up of the extension, you can overri
 
 By default, the `initialize` method loads the config file (if it exists) and the routes file (if it exists). In the event you don't need either of those things changed but still want to do some initialization work, you'll need to make sure the parent is called first.
 
-`protected function initialize()
+<pre>protected function initialize()
 {
 	parent::initialize();
 
 	// Your code here
-}`
+}</pre>
 
 If you want to change the way config files or routes are loaded, you don't have to call the parent method and can instead put your code directly in the method.
 
-`protected function initialize()
+<pre>protected function initialize()
 {
 	// Config loading
 
 	// Route loading
-}`
+}</pre>
 
 In the event that you just need to change one of the loading operations, you can override either the `loadConfig` method or the `loadFileRoutes` method from the base class file.
