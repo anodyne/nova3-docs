@@ -2,6 +2,8 @@
 
 Nova includes an Artisan command for generating the basic skeleton for a theme. This is a great way for theme developers to get something up and running quickly without having to worry about remembering how things are supposed to be set up.
 
+__Note: You'll need to make sure you understand and have the Artisan console command tool set up properly in order to use this command.__
+
 ## The Command
 
 The command accepts one mandatory argument: the name of the theme.
@@ -19,6 +21,6 @@ In addition to the mandatory argument, the command also comes with several optio
 
 Any combination of these options can be called when running the initial command, like so:
 
-`php artisan nova:make:theme sunny --override-styles`
-`php artisan nova:make:theme sunny --include-theme --include-options`
-`php artisan nova:make:theme sunny --include-components --include-theme`
+<code>php artisan nova:make:theme sunny --override-styles
+php artisan nova:make:theme sunny --include-theme --include-options
+php artisan nova:make:theme sunny --include-components --include-theme</code>
