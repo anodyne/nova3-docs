@@ -4,11 +4,13 @@ Nova includes an Artisan command for generating the basic skeleton for an extens
 
 ## The Command
 
-The command accepts two mandatory arguments. The first argument is the vendor name, or in other words, a way to identify all of your extensions. For Anodyne's first-party extensions, the vendor name is _Anodyne_ (case-sensitive). For your extensions, that could be your name or an alias or a  handle you use. The second argument is the extension name which should be the name of the extension without any spaces.
+The command accepts two mandatory arguments. The first argument is the vendor name, or in other words, a way to identify all of your extensions. For Anodyne's first-party extensions, the vendor name is _Anodyne_ (case-sensitive). For your extensions, that could be your name or an alias or a handle you use. The second argument is the extension name which should be the name of the extension without any spaces.
 
-So let's say we're jumping in to create our first extension and want to generate the skeleton. All we would need to do is open up the command line (usually on a local machine for development purposes) and run `php artisan nova:make:extension MyAwesomeName MyAwesomeExtension`. That would generate a `MyAwesomeName` directory in the `extensions` directory. Within there, you'd find a `MyAwesomeExtension` directory with the necessary structure for your extension, including a service provider, extension class, QuickInstall file, and more.
+So let's say we're jumping in to create our first extension and want to generate the skeleton. All we would need to do is open up the command line (usually on a local machine for development purposes) and run `php artisan nova:make:extension MyAwesomeName "My Awesome Extension"`. That would generate a `MyAwesomeName` directory in the `extensions` directory. Within there, you'd find a `MyAwesomeExtension` directory with the necessary structure for your extension, including a service provider, extension class, QuickInstall file, and more.
 
-_It's important to take note of the casing. You can use lowercase vendor and extension names if you want, but the namespaces are generated from those items and will mean all references to your extension will need to have the namespaces lowercased._
+__Note:__ You'll notice that the proper name of the extension has spaces. Because of the way Artisan works, if you have a proper name that has spaces, you'll need to wrap it in quotes. The command will take care of removing the spaces for the directory name, but keep the proper name intact for display purposes.
+
+__Additional Note:__ It's also important to take note of the casing with your vendor and extension name. You can use lowercase vendor and extension names if you want, but the namespaces are generated from those items and will mean all references to your extension will need to have the namespaces lowercased.
 
 ## The Options
 
